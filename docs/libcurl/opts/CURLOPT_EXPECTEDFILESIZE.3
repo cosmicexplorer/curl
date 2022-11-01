@@ -22,49 +22,40 @@
 .\" *
 .\" **************************************************************************
 .\"
-.TH CURLOPT_IGNORE_CONTENT_LENGTH 3 "19 Jun 2014" "libcurl 7.37.0" "curl_easy_setopt options"
+.TH CURLOPT_EXPECTEDFILESIZE 3 "1 Nov 2022" "libcurl 7.86.1" "curl_easy_setopt options"
 .SH NAME
-CURLOPT_IGNORE_CONTENT_LENGTH \- ignore content length
+CURLOPT_EXPECTEDFILESIZE \- maximum file size allowed to download
 .SH SYNOPSIS
 .nf
 #include <curl/curl.h>
 
-CURLcode curl_easy_setopt(CURL *handle, CURLOPT_IGNORE_CONTENT_LENGTH,
-                          long ignore);
+CURLcode curl_easy_setopt(CURL *handle, CURLOPT_EXPECTEDFILESIZE,
+                          curl_off_t size);
 .SH DESCRIPTION
-If \fIignore\fP is set to 1L, ignore the Content-Length header in the HTTP
-response and ignore asking for or relying on it for FTP transfers.
+Pass a curl_off_t as parameter. This allows you to specify the expected
+\fIsize\fP (in bytes) of a file to download to enable progress and remaining time estimation with the progress bar, when Content-Length is not provided by the response. If Content-Length is provided, this parameter is ignored unless \fICURLOPT_IGNORE_CONTENT_LENGTH(3)\fP is also specified.
 
-This is useful for HTTP with Apache 1.x (and similar servers) which will
-report incorrect content length for files over 2 gigabytes. If this option is
-used, curl will not be able to accurately report progress, and will simply
-stop the download when the server ends the connection.
-
-It is also useful with FTP when for example the file is growing while the
-transfer is in progress which otherwise will unconditionally cause libcurl to
-report error.
-
-Only use this option if strictly necessary.
 .SH DEFAULT
-0
+None
 .SH PROTOCOLS
-HTTP
+FTP, HTTP and MQTT
 .SH EXAMPLE
 .nf
 CURL *curl = curl_easy_init();
 if(curl) {
-  curl_easy_setopt(curl, CURLOPT_URL, "https://example.com");
-
+  CURLcode ret;
+  curl_off_t expected = 2000;
+  curl_easy_setopt(curl, CURLOPT_URL, "https://example.com/");
   /* we know the server is silly, ignore content-length */
   curl_easy_setopt(curl, CURLOPT_IGNORE_CONTENT_LENGTH, 1L);
-
-  curl_easy_perform(curl);
+  /* inform the progress bar of our expected size */
+  curl_easy_setopt(curl, CURLOPT_EXPECTEDFILESIZE, expected);
+  ret = curl_easy_perform(curl);
 }
 .fi
 .SH AVAILABILITY
-Added in 7.14.1. Support for FTP added in 7.46.0. This option is not working
-for HTTP when libcurl is built to use the hyper backend.
+Added in 7.11.0
 .SH RETURN VALUE
 Returns CURLE_OK if the option is supported, and CURLE_UNKNOWN_OPTION if not.
 .SH "SEE ALSO"
-.BR CURLOPT_HTTP_VERSION "(3), " CURLOPT_MAXFILESIZE_LARGE "(3), " CURLOPT_EXPECTEDFILESIZE "(3), "
+.BR CURLOPT_MAXFILESIZE "(3), " CURLOPT_MAX_RECV_SPEED_LARGE "(3), "

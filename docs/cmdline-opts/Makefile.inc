@@ -72,6 +72,7 @@ DPAGES = \
   engine.d \
   etag-compare.d \
   etag-save.d \
+  expected-filesize.d \
   expect100-timeout.d \
   fail-early.d \
   fail-with-body.d \

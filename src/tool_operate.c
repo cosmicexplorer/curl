@@ -1888,6 +1888,10 @@ static CURLcode single_transfer(struct GlobalConfig *global,
           my_setopt(curl, CURLOPT_MAXFILESIZE_LARGE,
                     config->max_filesize);
 
+        /* new in curl 7.86.1 */
+        if(config->expected_filesize)
+          my_setopt(curl, CURLOPT_EXPECTEDFILESIZE, config->expected_filesize);
+
         my_setopt(curl, CURLOPT_IPRESOLVE, config->ip_version);
 
         /* new in curl 7.15.5 */

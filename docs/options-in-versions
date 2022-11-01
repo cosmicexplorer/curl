@@ -58,6 +58,7 @@
 --engine                             7.9.3
 --etag-compare                       7.68.0
 --etag-save                          7.68.0
+--expected-filesize                  7.86.1
 --expect100-timeout                  7.47.0
 --fail (-f)                          4.0
 --fail-early                         7.52.0

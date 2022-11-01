@@ -74,6 +74,7 @@ struct OperationConfig {
   long connecttimeout_ms;
   long maxredirs;
   curl_off_t max_filesize;
+  curl_off_t expected_filesize;
   char *output_dir;
   char *headerfile;
   char *ftpport;

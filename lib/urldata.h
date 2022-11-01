@@ -1764,6 +1764,7 @@ struct UserDefined {
   unsigned char ipver; /* the CURL_IPRESOLVE_* defines in the public header
                           file 0 - whatever, 1 - v2, 2 - v6 */
   curl_off_t max_filesize; /* Maximum file size to download */
+  curl_off_t expected_filesize; /* Expected file size to download */
 #ifndef CURL_DISABLE_FTP
   unsigned char ftp_filemethod; /* how to get to a file: curl_ftpfile  */
   unsigned char ftpsslauth; /* what AUTH XXX to try: curl_ftpauth */

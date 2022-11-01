@@ -6,7 +6,7 @@ Protocols: FTP HTTP
 Category: http ftp
 Example: --ignore-content-length $URL
 Added: 7.14.1
-See-also: ftp-skip-pasv-ip
+See-also: ftp-skip-pasv-ip expected-filesize
 Multi: boolean
 ---
 For HTTP, Ignore the Content-Length header. This is particularly useful for

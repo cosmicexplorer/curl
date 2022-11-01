@@ -163,6 +163,7 @@ man_MANS =                                      \
   CURLOPT_DOH_URL.3                             \
   CURLOPT_EGDSOCKET.3                           \
   CURLOPT_ERRORBUFFER.3                         \
+  CURLOPT_EXPECTEDFILESIZE.3                    \
   CURLOPT_EXPECT_100_TIMEOUT_MS.3               \
   CURLOPT_FAILONERROR.3                         \
   CURLOPT_FILETIME.3                            \

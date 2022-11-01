@@ -2157,6 +2157,9 @@ typedef enum {
   /* websockets options */
   CURLOPT(CURLOPT_WS_OPTIONS, CURLOPTTYPE_LONG, 320),
 
+  /* Provide an expected download size when Content-Length is absent. */
+  CURLOPT(CURLOPT_EXPECTEDFILESIZE, CURLOPTTYPE_OFF_T, 321),
+
   CURLOPT_LASTENTRY /* the last unused */
 } CURLoption;
 

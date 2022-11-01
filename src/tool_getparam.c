@@ -121,6 +121,7 @@ static const struct LongShort aliases[]= {
          /* 'krb4' is the previous name */
   {"*X", "haproxy-protocol",         ARG_BOOL},
   {"*y", "max-filesize",             ARG_STRING},
+  {"*Y", "expected-filesize",        ARG_STRING},
   {"*z", "disable-eprt",             ARG_BOOL},
   {"*Z", "eprt",                     ARG_BOOL},
          /* 'eprt' made like this to make --no-eprt and --eprt to work
@@ -489,7 +490,8 @@ GetFileAndPassword(char *nextarg, char **file, char **password)
   }
 }
 
-/* Get a size parameter for '--limit-rate' or '--max-filesize'.
+/* Get a size parameter for '--limit-rate', '--max-filesize',
+ * or '--expected-filesize'.
  * We support a 'G', 'M' or 'K' suffix too.
   */
 static ParameterError GetSizeParameter(struct GlobalConfig *global,
@@ -1062,6 +1064,17 @@ ParameterError getparameter(const char *flag, /* f or -long-flag */
           curl_off_t value;
           ParameterError pe =
             GetSizeParameter(global, nextarg, "max-filesize", &value);
+
+          if(pe != PARAM_OK)
+             return pe;
+          config->max_filesize = value;
+        }
+        break;
+      case 'Y': /* --expected-filesize */
+        {
+          curl_off_t value;
+          ParameterError pe =
+            GetSizeParameter(global, nextarg, "expected-filesize", &value);
 
           if(pe != PARAM_OK)
              return pe;

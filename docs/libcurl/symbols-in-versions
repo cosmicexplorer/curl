@@ -609,6 +609,7 @@ CURLOPT_DOH_URL                 7.62.0
 CURLOPT_EGDSOCKET               7.7           7.84.0
 CURLOPT_ENCODING                7.10          7.21.6
 CURLOPT_ERRORBUFFER             7.1
+CURLOPT_EXPECTEDFILESIZE        7.86.1
 CURLOPT_EXPECT_100_TIMEOUT_MS   7.36.0
 CURLOPT_FAILONERROR             7.1
 CURLOPT_FILE                    7.1           7.9.7

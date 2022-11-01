@@ -193,6 +193,7 @@ CURLcode Curl_vsetopt(struct Curl_easy *data, CURLoption option, va_list param)
   long arg;
   unsigned long uarg;
   curl_off_t bigsize;
+  curl_off_t expected_size;
 
   switch(option) {
   case CURLOPT_DNS_CACHE_TIMEOUT:
@@ -2383,6 +2384,16 @@ CURLcode Curl_vsetopt(struct Curl_easy *data, CURLoption option, va_list param)
     if(bigsize < 0)
       return CURLE_BAD_FUNCTION_ARGUMENT;
     data->set.max_filesize = bigsize;
+    break;
+
+  case CURLOPT_EXPECTEDFILESIZE:
+    /*
+     * Set the expected size of a file to download.
+     */
+    expected_size = va_arg(param, curl_off_t);
+    if(expected_size < 0)
+      return CURLE_BAD_FUNCTION_ARGUMENT;
+    data->set.expected_filesize = expected_size;
     break;
 
   case CURLOPT_TCP_NODELAY:
